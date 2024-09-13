@@ -2,33 +2,75 @@
 
 ## 更新日誌
 
+### v4.3.0 2024-09-14
+- 測試新的安裝過程
+- 停止追蹤 vendor 目錄
+- 更新後台頁腳年份為動態更新
+- 在安裝前將預設快取驅動程式更新為 null
+- 更新 README.md
+- 改進預設模板
+- 更新安裝程式圖示。安裝時自動添加強制 HTTPS 設定
+- 向安裝程式添加錯誤訊息
+- 在安裝過程中添加選擇 Redis、Memcache、文件作為快取驅動程式的選項
+- 將預設 DB_CONNECTION 設為內存中的假 SQLite。將預設 SESSION 驅動程式設為文件
+- 禁用安裝過程中的 trait 文件生成
+- 在系統設定中添加強制 HTTPS 選項
+- 添加預設 env 文件
+- 更新 .gitignore
+- 更新 composer 依賴
+- 更新主題選項面板
+- 改進首次網站創建流程
+- 移除調試訊息
+- 修正後台樣式
+- 重命名 Traits。修正安裝錯誤。添加強制 HTTPS 相容性
+- 在要求之前檢查自定義語言文件是否存在
+
+### v4.2.0 2024-09-13
+- 移除 WnTagTraits.php
+- 在生成示例文章內容時添加翻譯
+- 改進預設首頁模板。添加文章存檔 URL
+- 添加更多翻譯
+- 修正添加第二個網站時的錯誤
+
+### v4.1.0 2024-09-07
+- 添加強制 HTTPS 選項
+- 小幅修正
+- 更新預設 env 文件以隱藏調試訊息
+- 安裝和網站創建後清除快取
+- 添加 PHP 函數需求檢查
+- 將 database.sqlite 添加到 .gitignore
+- 修正創建主題命令。根據 Laravel 11 結構更新 lang 目錄
+- 修正廣告過期日期不能為空的錯誤
+- 移除無用的 UpdateLog 模型
+- 更新預設模型設定
+- 更新安裝程式
+- 添加禁用用戶註冊功能
+- 在網站編輯頁面上將主題設置為 null 而非預設
+
 ### v4.0.0 2024-08-03
 #### 新增
-- php 需求從 7.2+ 提升至 8.2+
-- laravel 10 -> 11
-- jquery 3.2.1 -> 3.7.1
-- 更新所有 composer 依賴項
-- 添加資料庫前綴以避免與 mysql 保留關鍵字的表名衝突
-
+- PHP 需求從 7.2+ 升級至 8.2+
+- Laravel 10 -> 11
+- jQuery 3.2.1 -> 3.7.1
+- 更新所有 composer 依賴
+- 添加數據庫前綴以避免與 MySQL 保留關鍵字的表名衝突
 #### 修復
-- 修復當 cms 未安裝時，導航到 panel/xxxx 頁面時出現的錯誤
-- 修復 php artisan migrate:fresh 無法正常工作
-- 修復當 $request-input 為 null 時的頁面控制器錯誤
-
+- 修正當 CMS 未安裝時導航 panel/xxxx 頁面的錯誤
+- 修正 php artisan migrate:fresh 不工作
+- 修正當 $request-input 為 null 時頁面控制器錯誤
 #### 優化
-- 合併舊的遷移檔案並重新命名遷移文件
-- 將 modal 資料表欄位 external_image 重命名為 external_thumbnail
-- 更新預設的 env 文件生成器
-- 將 wncms_get_unique_slug() 的預設長度設置為 8
-- 所有 // 註解應在 // 之後留一個空格。例如：// Good 和 //Bad
+- 合併舊遷移並重命名遷移文件
+- 重命名資料庫列 external_image -> external_thumbnail
+- 更新預設 env 文件生成器
+- wncms_get_unique_slug() 將預設長度設為 8
+- 所有 // 註釋後應留有空格。例如 // Good 和 //Bad
 - 重寫 wncms.js 和 AuthenticatedSessionController 中的登入邏輯
-
 #### 移除
-- 移除 vendor 目錄以減少封包大小。安裝時將下載所需的套件
+- 移除 vendor 目錄以縮小包大小。安裝過程中將下載包
 - 移除全域函數 wn()，全部替換為 wncms()
 - 移除全域變數 $wn，全部替換為 $wncms
-- 移除分析輔助工具以避免性能問題，改為使用第三方分析工具
-- 移除 wncms_get_theme_options() 輔助函數。使用 model 中的 $website->get_options()
+- 移除分析幫助程式以避免性能問題。用第三方分析工具替代
+- 移除 wncms_get_theme_options() 幫助函數。在模型中使用 $website->get_options()
 
 ### v3.2.1 2024-05-19
 #### 新增
@@ -189,12 +231,12 @@ ___
 - 緩存讚好數，每日使用排程任務更新到模組 like 欄位，可加速不需要實時讚好數的模組
 - 更新 RecordViews 排程任務，可以紀錄任何 collection，例如visit, like, dislike
 - [開發者] 新增 $wn->addVersion()，不需要再於模版中加上 '?v=' . $wn->getVersion()，新功能輸出時已包括 ?v=
-- 引入 applicaion/ld+json 選項，可以Push到<head>中
+- 引入 applicaion/ld+json 選項，可以Push到 `<head>` 中
 #### 修復
 - 修復3.1.3更新後，部分頁面未能讀取內容
 
 #### 優化
-- 預設主題<title>從「首頁」改為網站名稱
+- 預設主題 `<title>` 從「首頁」改為網站名稱
 - 優化新增同名權限時的提示，不再是報錯，而是提示已有重覆項目
 - [開發者] 重新命名前端視圖中的統計部分 get_view -> get, record_like -> like, record_view -> record
 
